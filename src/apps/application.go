@@ -5,13 +5,10 @@ import (
 
 	db "coffee-mate/src/database"
 
-	"github.com/gin-gonic/gin"
-	// "github.com/saefullohmaslul/golang-example/src/database/migration"
-
-	// "github.com/saefullohmaslul/golang-example/src/database/migration"
-	// "github.com/saefullohmaslul/golang-example/src/jobs"
 	"coffee-mate/src/middleware/exception"
 	"coffee-mate/src/routes"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Application -> application instance
