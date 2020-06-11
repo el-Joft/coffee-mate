@@ -10,4 +10,5 @@ require (
 	github.com/jpoles1/gopherbadger v2.2.0+incompatible
 	github.com/mitchellh/mapstructure v1.3.2
 	github.com/saefullohmaslul/golang-example v0.0.0-20200517165016-0b7230ac3130
+	github.com/satori/go.uuid v1.2.0 // indirect
 )
