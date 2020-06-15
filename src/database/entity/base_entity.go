@@ -9,7 +9,7 @@ import (
 
 // Base -> base entity schema
 type Base struct {
-	ID        string     `sql:"type:uuid;primary_key;default:uuid_generate_v4()"`
+	ID        string     `gorm:"type:uuid;default:gen_random_uuid()"`
 	CreatedAt time.Time  `json:"created_at"`
 	UpdatedAt time.Time  `json:"update_at"`
 	DeletedAt *time.Time `sql:"index" json:"deleted_at"`

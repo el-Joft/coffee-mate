@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"coffee-mate/src/controllers"
+	"coffee-mate/src/validations"
 
 	"github.com/gin-gonic/gin"
 	// "coffee-mate/src/validations"
@@ -11,12 +12,12 @@ import (
 
 // Router middleware to handler routes
 func Router(g *gin.RouterGroup) {
-	// controller := controllers.UController()
+	usercontroller := controllers.UController()
 	// homeController := controllers.HController()
 	// {
 	// 	g.GET("/users", controller.GetUsers)
 	// 	g.GET("/user/:id", validations.GetUser, controller.GetUser)
-	// 	g.POST("/user", validations.CreateUser, controller.CreateUser)
+	g.POST("/user", validations.CreateUser, usercontroller.CreateUser)
 	// 	g.PATCH("/user/:id", validations.UpdateUser, controller.UpdateUser)
 	// 	g.DELETE("/user/:id", validations.DeleteUser, controller.DeleteUser)
 

@@ -1,7 +1,7 @@
 package exception_test
 
 import (
-	"coffee-mate/src/middlewares/exception"
+	"coffee-mate/src/middleware/exception"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
