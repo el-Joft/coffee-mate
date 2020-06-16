@@ -1,13 +1,13 @@
 package db
 
 import (
+	"coffee-mate/src/database/entity"
 	"fmt"
 	"os"
 
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 	"github.com/jpoles1/gopherbadger/logging"
-	// "github.com/saefullohmaslul/golang-example/src/database/entity"
 )
 
 var conn *gorm.DB
@@ -60,5 +60,5 @@ func GetDB() *gorm.DB {
 
 // DropAllTable -> method to drop all database table (using this only for testing)
 func DropAllTable() {
-	// conn.DropTable(&entity.User{})
+	conn.DropTable(&entity.User{})
 }

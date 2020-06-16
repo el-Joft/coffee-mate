@@ -18,4 +18,5 @@ type Response struct {
 type Error struct {
 	Message string `json:"message"`
 	Flag    string `json:"flag"`
+	Field   string `json:"field"`
 }
