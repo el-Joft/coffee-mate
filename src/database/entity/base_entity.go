@@ -9,10 +9,10 @@ import (
 
 // Base -> base entity schema
 type Base struct {
-	ID        string     `gorm:"type:uuid;default:gen_random_uuid()"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"update_at"`
-	DeletedAt *time.Time `sql:"index" json:"deleted_at"`
+	ID        uuid.UUID  `gorm:"primary_key;unique;column:id;type:uuid;"`
+	CreatedAt time.Time  `gorm:"column:created_at" json:"created_at"`
+	UpdatedAt time.Time  `gorm:"column:updated_at" json:"updated_at"`
+	DeletedAt *time.Time `gorm:"column:deleted_at" json:"deleted_at"`
 }
 
 // BeforeCreate will set a UUID rather than numeric ID.
