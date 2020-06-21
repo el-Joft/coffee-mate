@@ -2,11 +2,12 @@ package schemas
 
 // CreateUser is create user schema validation
 type CreateUser struct {
-	Fullname string `validate:"required"`
-	Email    string `validate:"required,email"`
-	Password string `json:"password" validate:"required,min=4,passwd"`
-	Age      int64  `validate:"omitempty,numeric,gt=0"`
-	Address  string
+	FirstName string `validate:"required" json:"first_name"`
+	LastName  string `validate:"required" json:"last_name"`
+	Username  string `validate:"required"`
+	Email     string `validate:"required,email"`
+	Password  string `json:"password" validate:"required,passwd"`
+	Age       int64  `validate:"omitempty,numeric,gt=0"`
 }
 
 // UserID is param uri validation for id

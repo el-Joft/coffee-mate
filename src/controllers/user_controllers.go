@@ -31,6 +31,7 @@ func (u *UserController) CreateUser(c *gin.Context) {
 		c.AbortWithStatus(400)
 		return
 	}
+	// log.Printf("Data %s\n", user)
 	data := u.Service.CreateUser(user)
 	c.JSON(http.StatusCreated, gin.H{
 		"status":  http.StatusCreated,

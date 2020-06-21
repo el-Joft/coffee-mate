@@ -1,6 +1,8 @@
 package validations
 
 import (
+	"coffee-mate/src/database/entity"
+	"coffee-mate/src/middleware/exception"
 	"coffee-mate/src/validations/schemas"
 	"fmt"
 
@@ -21,11 +23,12 @@ func CreateUser(c *gin.Context) {
 	}
 
 	userValidate := &schemas.CreateUser{
-		Fullname: user.Fullname,
-		Password: user.Password,
-		Address:  user.Address,
-		Age:      user.Age,
-		Email:    user.Email,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		Password:  user.Password,
+		Username:  user.Username,
+		Age:       user.Age,
+		Email:     user.Email,
 	}
 
 	validate.RegisterTranslation("passwd", trans, func(ut ut.Translator) error {
@@ -40,4 +43,34 @@ func CreateUser(c *gin.Context) {
 
 	Validate(userValidate, errors)
 
+}
+
+// UserExistValidation -> validate if user exist
+func UserExistValidation(userExist []entity.User, user entity.User) {
+	var errors []map[string]interface{}
+	switch len(userExist) {
+	case 1:
+		if userExist[0].Email == user.Email {
+			errors = append(errors, map[string]interface{}{
+				"message": "Email already exist",
+				"field":   "email",
+				"flag":    "USER_ALREADY_EXIST"},
+			)
+		}
+		if userExist[0].Username == user.Username {
+			errors = append(errors, map[string]interface{}{
+				"message": "Username already exist",
+				"field":   "username",
+				"flag":    "USER_ALREADY_EXIST"},
+			)
+		}
+		break
+	case 2:
+		errors = append(errors, map[string]interface{}{
+			"message": "Email and Username already exist",
+			"flag":    "USER_ALREADY_EXIST"},
+		)
+		break
+	}
+	exception.Conflict("User Conflict", errors)
 }
