@@ -16,11 +16,11 @@ func CreateUser(db *gorm.DB) error {
 	}
 
 	return db.Create(&entity.User{
-		FullName: user.FullName,
-		Address:  user.Address,
-		Age:      user.Age,
-		Email:    user.Email,
-		Password: user.Password,
-		AvatarPath: user.AvatarPath,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		Password:  user.Password,
+		Username:  user.Username,
+		Age:       user.Age,
+		Email:     user.Email,
 	}).Error
 }

@@ -52,14 +52,14 @@ func UserExistValidation(userExist []entity.User, user entity.User) {
 	case 1:
 		if userExist[0].Email == user.Email {
 			errors = append(errors, map[string]interface{}{
-				"message": "Email already exist",
+				"message": "User with this email already exist",
 				"field":   "email",
 				"flag":    "USER_ALREADY_EXIST"},
 			)
 		}
 		if userExist[0].Username == user.Username {
 			errors = append(errors, map[string]interface{}{
-				"message": "Username already exist",
+				"message": "User with this username already exist",
 				"field":   "username",
 				"flag":    "USER_ALREADY_EXIST"},
 			)

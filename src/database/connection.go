@@ -3,6 +3,7 @@ package db
 import (
 	"coffee-mate/src/database/entity"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jinzhu/gorm"
@@ -47,10 +48,16 @@ func AppConnection() {
 
 // TestConnection -> method to create connection for application testing
 func TestConnection() {
-	if err := godotenv.Load("../.env.test"); err != nil {
-		logging.Error("ENV", err)
+	if _, err := os.Stat("../../.env.test"); !os.IsNotExist(err) {
+		var err error
+		err = godotenv.Load(os.ExpandEnv("../../.env.test"))
+		if err != nil {
+			log.Fatalf("Error getting env %v\n", err)
+		}
+		Connection()
+	} else {
+		CIBuild()
 	}
-	Connection()
 }
 
 // GetDB -> method to get connection instance
@@ -61,4 +68,28 @@ func GetDB() *gorm.DB {
 // DropAllTable -> method to drop all database table (using this only for testing)
 func DropAllTable() {
 	conn.DropTable(&entity.User{})
+}
+
+// RefreshUserTable ->
+func RefreshUserTable() error {
+	err := conn.DropTableIfExists(&entity.User{}).Error
+	if err != nil {
+		return err
+	}
+	err = conn.AutoMigrate(&entity.User{}).Error
+	if err != nil {
+		return err
+	}
+	log.Printf("Successfully refreshed table")
+	return nil
+}
+
+// CIBuild -> continous integration
+func CIBuild() {
+	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", "127.0.0.1", "5433", "developer", "coffee_mate_test", "developer")
+	conn, err = gorm.Open("postgres", DBURL)
+	if err != nil {
+		logging.Error("DB", err)
+	}
+
 }
