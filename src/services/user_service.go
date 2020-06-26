@@ -33,3 +33,4 @@ func (s *UserService) CreateUser(user entity.User) repositories.GetUser {
 	data := s.UserRepository.CreateUser(user)
 	return data
 }
+ 

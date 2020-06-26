@@ -1,5 +1,7 @@
 package seed
 
+import "github.com/jinzhu/gorm"
+
 // Seed -> Seed database configuration
 type Seed struct {
 	Name string
