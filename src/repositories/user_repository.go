@@ -67,3 +67,34 @@ func (r *UserRepository) CreateUser(user entity.User) GetUser {
 	r.Conn.Select("id, username, email, first_name, age").Where("id = ?", user.ID).First(&userCreated)
 	return userCreated
 }
+
+// GetUserByEmail -> Get User by Email
+func (r *UserRepository) GetUserByEmail(email string) GetUser {
+	var errors []map[string]interface{}
+	var err error
+	returnUser := GetUser{}
+	err = r.Conn.Select("id, username, email, first_name, age").Where("email = ?", email).First(returnUser).Error
+	if err != nil {
+		errors = append(errors, map[string]interface{}{
+			"message": err.Error()},
+		)
+		exception.NotFound("error", errors)
+	}
+	return returnUser
+}
+
+// GetUserByEmailForLogin -> Get User by Email
+func (r *UserRepository) GetUserByEmailForLogin(email string) entity.User {
+	var errors []map[string]interface{}
+	var err error
+	returnUser := entity.User{}
+	err = r.Conn.Select("id, username, email, first_name, age, password").Where("email = ?", email).First(&returnUser).Error
+	if err != nil {
+		errors = append(errors, map[string]interface{}{
+			"message": "Please Provide valid Login details"},
+		)
+		exception.NotFound("error", errors)
+	}
+
+	return returnUser
+}

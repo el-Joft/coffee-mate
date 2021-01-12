@@ -45,6 +45,26 @@ func CreateUser(c *gin.Context) {
 
 }
 
+// LoginUser -> validation for login user
+func LoginUser(c *gin.Context) {
+	var errors []map[string]interface{}
+	var user schemas.LoginUser
+	if err := c.ShouldBindBodyWith(&user, binding.JSON); err != nil {
+		errors = append(errors, map[string]interface{}{
+			"message": fmt.Sprint(err.Error()), "flag": "INVALID_BODY"},
+		)
+	}
+
+	userValidate := &schemas.LoginUser{
+		Email:    user.Email,
+		Password: user.Password,
+	}
+	// log.Printf("Data %s\n", userValidate)
+
+	Validate(userValidate, errors)
+
+}
+
 // UserExistValidation -> validate if user exist
 func UserExistValidation(userExist []entity.User, user entity.User) {
 	var errors []map[string]interface{}

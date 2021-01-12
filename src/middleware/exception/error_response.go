@@ -45,3 +45,25 @@ func InternalServerError(message string, errors []map[string]interface{}) {
 	}
 	panic(response)
 }
+
+// StatusUnauthorized -> response for internal server error
+func StatusUnauthorized(message string, errors []map[string]interface{}) {
+	response := map[string]interface{}{
+		"message": message,
+		"data":    nil,
+		"status":  http.StatusUnauthorized,
+		"errors":  errors,
+	}
+	panic(response)
+}
+
+// StatusUnprocessableEntity -> response for unprocessable entity
+func StatusUnprocessableEntity(message string, errors []map[string]interface{}) {
+	response := map[string]interface{}{
+		"message": message,
+		"data":    nil,
+		"status":  http.StatusUnprocessableEntity,
+		"errors":  errors,
+	}
+	panic(response)
+}

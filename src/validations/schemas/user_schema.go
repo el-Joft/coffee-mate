@@ -22,3 +22,9 @@ type UpdateUser struct {
 	Age     int64  `validate:"omitempty,numeric,gt=0"`
 	Address string
 }
+
+// LoginUser is login user schema validation
+type LoginUser struct {
+	Email    string `validate:"required,email"`
+	Password string `json:"password" validate:"required"`
+}
