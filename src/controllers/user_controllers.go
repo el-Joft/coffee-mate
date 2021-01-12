@@ -40,3 +40,22 @@ func (u *UserController) CreateUser(c *gin.Context) {
 		"error":   nil,
 	})
 }
+
+// LoginUser -> login user controller
+func (u *UserController) LoginUser(c *gin.Context) {
+	var user entity.User
+	if err := c.ShouldBindBodyWith(&user, binding.JSON); err != nil {
+		c.AbortWithStatus(400)
+		return
+	}
+
+	// check if user email and password exist, to return user data
+	data := u.Service.LoginUser(user.Email, user.Password)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  http.StatusOK,
+		"message": "User Login Successfully",
+		"data":    data,
+		"error":   nil,
+	})
+}

@@ -6,6 +6,21 @@ A golang application
 </p>
 
 
+## How to run locally
+
+start the application with
+
+```bash
+go run src/main.go
+```
+
+to run test
+example
+
+```bash
+go run tests/create_user_test.go
+```
+
 ## How to run
 
 There are two ways to run this application, with docker or without docker
