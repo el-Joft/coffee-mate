@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"coffee-mate/src/controllers"
+	"coffee-mate/src/middleware/auth"
 	"coffee-mate/src/validations"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +24,7 @@ func Router(g *gin.RouterGroup) {
 	g.POST("/login", validations.LoginUser, usercontroller.LoginUser)
 
 	// home
-	g.GET("/", controllers.HomeMessage)
+	g.GET("/", auth.TokenAuthenticationMiddleware, controllers.HomeMessage)
 	g.GET("/home", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  http.StatusOK,
