@@ -67,3 +67,14 @@ func StatusUnprocessableEntity(message string, errors []map[string]interface{}) 
 	}
 	panic(response)
 }
+
+// StatusForbidden -> response for unprocessable entity
+func StatusForbidden(message string, errors []map[string]interface{}) {
+	response := map[string]interface{}{
+		"message": message,
+		"data":    nil,
+		"status":  http.StatusForbidden,
+		"errors":  errors,
+	}
+	panic(response)
+}

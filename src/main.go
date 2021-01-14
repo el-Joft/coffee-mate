@@ -50,5 +50,6 @@ func main() {
 	if err := r.Run(":" + port); err != nil {
 		logging.Error("APP", err)
 	}
+	// endless.ListenAndServe(":4242", router)
 
 }

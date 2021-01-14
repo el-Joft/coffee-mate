@@ -83,6 +83,16 @@ func (r *UserRepository) GetUserByEmail(email string) GetUser {
 	return returnUser
 }
 
+// GetByParam -> Get User by Email
+func (r *UserRepository) GetByParam(id string) (entity.User, error) {
+
+	var err error
+	returnUser := entity.User{}
+	err = r.Conn.First(&returnUser, "id = ?", id).Error
+
+	return returnUser, err
+}
+
 // GetUserByEmailForLogin -> Get User by Email
 func (r *UserRepository) GetUserByEmailForLogin(email string) entity.User {
 	var errors []map[string]interface{}
