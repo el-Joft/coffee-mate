@@ -4,6 +4,7 @@ import (
 	"coffee-mate/src/database/entity"
 	"coffee-mate/src/middleware/exception"
 	"coffee-mate/src/repositories"
+	tokenutil "coffee-mate/src/utils/security/token"
 	"coffee-mate/src/utils/security"
 	"coffee-mate/src/validations"
 
@@ -78,7 +79,7 @@ func (s *UserService) LoginUser(email, password string) interface{} {
 	}
 
 	// Generate Auth token
-	token, err = security.CreateToken(user.ID, user.Email, user.FirstName)
+	token, err = tokenutil.CreateToken(user.ID, user.Email, user.FirstName)
 	if err != nil {
 		errors = append(errors, map[string]interface{}{
 			"message": err.Error()},
@@ -86,6 +87,7 @@ func (s *UserService) LoginUser(email, password string) interface{} {
 		exception.BadRequest("error", errors)
 	}
 	var resp = map[string]interface{}{}
+
 	resp["token"] = token //Store the token in the response
 	// this is used to copy struct to another based on match fields
 	// resource := &repositories.GetUser{}

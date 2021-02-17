@@ -4,7 +4,7 @@ import (
 	"coffee-mate/src/database/entity"
 	"coffee-mate/src/middleware/exception"
 	"coffee-mate/src/repositories"
-	"coffee-mate/src/utils/security"
+	tokenutils "coffee-mate/src/utils/security/token"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -22,7 +22,7 @@ func TokenAuthenticationMiddleware(c *gin.Context) {
 // TokenValid ->
 func TokenValid(c *gin.Context) *jwt.Token {
 	var errors []map[string]interface{}
-	token, err := security.VerifyToken(c)
+	token, err := tokenutils.VerifyToken(c)
 
 	if err != nil {
 		errors = append(errors, map[string]interface{}{

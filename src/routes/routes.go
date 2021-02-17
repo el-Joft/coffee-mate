@@ -13,7 +13,7 @@ import (
 // Router middleware to handler routes
 func Router(g *gin.RouterGroup) {
 	usercontroller := controllers.UController()
-	// homeController := controllers.HController()
+	homeController := controllers.HController()
 	// {
 	// 	g.GET("/users", controller.GetUsers)
 	// 	g.GET("/user/:id", validations.GetUser, controller.GetUser)
@@ -24,7 +24,7 @@ func Router(g *gin.RouterGroup) {
 	g.POST("/login", validations.LoginUser, usercontroller.LoginUser)
 
 	// home
-	g.GET("/", auth.TokenAuthenticationMiddleware, controllers.HomeMessage)
+	g.GET("/", auth.TokenAuthenticationMiddleware, homeController.HomeMessage)
 	g.GET("/home", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  http.StatusOK,

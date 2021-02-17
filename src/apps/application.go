@@ -18,7 +18,7 @@ type Application struct {
 
 // CreateApp -> method to create gin application
 func (a Application) CreateApp(r *gin.Engine) {
-	r.Use(exception.Recovery(exception.ErrorHandler))
+	// r.Use(exception.Recovery(exception.ErrorHandler))
 	configureAppDB()
 	configureAPIEndpoint(r)
 }

@@ -12,6 +12,7 @@ require (
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-playground/validator/v10 v10.3.0
+	github.com/go-redis/redis/v8 v8.4.8
 	github.com/google/uuid v1.1.1
 	github.com/hashicorp/go-hclog v0.15.0
 	github.com/jinzhu/gorm v1.9.13
